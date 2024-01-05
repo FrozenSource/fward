@@ -1,0 +1,32 @@
+# If ccache is available, use it inmediately.
+find_program(CCACHE_PROGRAM ccache)
+if (CCACHE_PROGRAM AND NOT DISABLE_CCACHE)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK "${CCACHE_PROGRAM}")
+    message(STATUS "Caching: enabled (ccache)")
+else ()
+    message(STATUS "Caching: disabled")
+endif ()
+
+# Sets the global linker to another.
+macro(set_alternate_linker linker)
+    find_program(LINKER_EXECUTABLE ld.${USE_ALTERNATE_LINKER} ${USE_ALTERNATE_LINKER})
+    if (LINKER_EXECUTABLE)
+        if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND "${CMAKE_CXX_COMPILER_VERSION}" VERSION_LESS 12.0.0)
+            add_link_options("-ld-path=${USE_ALTERNATE_LINKER}")
+        else ()
+            add_link_options("-fuse-ld=${USE_ALTERNATE_LINKER}")
+        endif ()
+    else ()
+        set(USE_ALTERNATE_LINKER "" CACHE STRING "Use alternate linker" FORCE)
+    endif ()
+endmacro()
+
+# If mold as a linker is found use that preferably.
+find_program(MOLD_LINKER_PATH mold)
+if (MOLD_LINKER_PATH AND NOT EMSCRIPTEN AND NOT BUILD_WASI)
+    message(STATUS "Linker: mold")
+    set_alternate_linker("mold")
+else ()
+    message(STATUS "Linker: system-default")
+endif ()

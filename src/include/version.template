@@ -1,0 +1,36 @@
+#pragma once
+//
+// Created by Bram Nijenkamp on 05-01-2024.
+//
+
+/**
+* @file version.h
+*
+* Contains the version information. If a build server wishes to change version information, do it here.
+*/
+#define VER_MAJOR                 @VER_MAJOR@
+#define VER_REVISION              @VER_REVISION@
+#define VER_MINOR                 @VER_MINOR@
+#define VER_BUILD                 @VER_BUILD@
+#define VER_STAGE_STR             "@VER_STAGE@"
+#define VER_STAGE_NR              "@VER_STAGE_NR@"
+#define VER_STAGE_FULL_STR        "@VER_STAGE@ @VER_STAGE_NR@"
+#define VER_STAGE_MANGLED_STR     "@VER_STAGE@-@VER_STAGE_NR@"
+#define VER_YEAR                  @VER_YEAR_NO_LEAD@
+#define VER_YEAR_SHORT            @VER_YEAR_SHORT_NO_LEAD@
+#define VER_MONTH                 @VER_MONTH_NO_LEAD@
+#define VER_DAY                   @VER_DAY_NO_LEAD@
+#define VER_HOUR                  @VER_HOUR_NO_LEAD@
+#define VER_MINUTE                @VER_MINUTE_NO_LEAD@
+#define VER_COPYRIGHT_FROM_YEAR   @VER_COPYRIGHT_FROM_YEAR_NO_LEAD@
+#define VER_GIT_REF_STR           "@VER_GIT_REF@"
+
+#define VER_COPYRIGHT_YEARS_STR   "@VER_COPYRIGHT_FROM_YEAR@-@VER_YEAR@"
+
+#define VER_MAJOR_REVISION        @VER_MAJOR@@VER_REVISION@
+#define VER_MAJOR_REVISION_STR    "@VER_MAJOR@.@VER_REVISION@"
+
+#define VER_STR                   "@VER_MAJOR@.@VER_REVISION@.@VER_MINOR@.@VER_BUILD@"
+#define VER_WITH_STAGE_STR        "@VER_MAJOR@.@VER_REVISION@.@VER_MINOR@.@VER_BUILD@-@VER_STAGE@-@VER_STAGE_NR@"
+#define VER_WITH_TODAY_STR        "@VER_MAJOR@.@VER_REVISION@.@VER_MINOR@.@VER_BUILD@"
+#define VER_FULL_STR              "@VER_MAJOR@.@VER_REVISION@.@VER_MINOR@.@VER_BUILD@-@VER_STAGE@-@VER_STAGE_NR@"
